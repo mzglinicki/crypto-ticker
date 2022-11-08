@@ -57,15 +57,15 @@ fun TopBar(
     uiState: UiState,
     onSearchQueryChanged: (String) -> Unit,
 ) {
-    if (uiState.isLoading) {
-        SimpleToolbar(
-            title = stringResource(id = R.string.toolbar_title),
-        )
-    } else {
+    if (uiState.showSearch) {
         SearchToolbar(
             title = stringResource(id = R.string.toolbar_title),
             searchState = uiState.searchState,
             onSearchQueryChanged = onSearchQueryChanged,
+        )
+    } else {
+        SimpleToolbar(
+            title = stringResource(id = R.string.toolbar_title),
         )
     }
 }

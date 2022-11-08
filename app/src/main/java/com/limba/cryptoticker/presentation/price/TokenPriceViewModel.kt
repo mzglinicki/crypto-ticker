@@ -80,6 +80,7 @@ class TokenPriceViewModel @Inject constructor(
         val showError: Boolean = false,
     ) {
         val showEmptyScreen = tokenCurrentPriceData.isEmpty()
+        val showSearch = !isLoading && !showEmptyScreen
     }
 
     private companion object {
