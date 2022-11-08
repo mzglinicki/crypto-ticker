@@ -7,11 +7,12 @@ class SearchTokenUseCase @Inject constructor() {
 
     operator fun invoke(
         dataToSearch: List<TokenCurrentPriceData>,
-        text: String
-    ) =
-        text.takeIf(String::isNotBlank)?.run {
-            dataToSearch.filter {
-                it.token.tokenName.contains(text, ignoreCase = true)
-            }
-        } ?: dataToSearch
+        text: String,
+    ): List<TokenCurrentPriceData> {
+        if (text.isBlank()) return dataToSearch
+
+        return dataToSearch.filter {
+            it.token.tokenName.contains(text, ignoreCase = true)
+        }
+    }
 }

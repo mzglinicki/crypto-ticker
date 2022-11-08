@@ -27,16 +27,15 @@ class TokenPriceViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            getTokensCurrentPrice()
-                .collect { result ->
-                    if (result is Success) {
-                        tokensTokenCurrentPriceData = result.tokensTokenCurrentPriceData
-                    }
-                    updateState(
-                        tokenCurrentPriceData = tokensTokenCurrentPriceData.map(::mapToUiModel),
-                        showError = result is Error,
-                    )
+            getTokensCurrentPrice().collect { result ->
+                if (result is Success) {
+                    tokensTokenCurrentPriceData = result.tokensTokenCurrentPriceData
                 }
+                updateState(
+                    tokenCurrentPriceData = tokensTokenCurrentPriceData.map(::mapToUiModel),
+                    showError = result is Error,
+                )
+            }
         }
     }
 
@@ -55,15 +54,13 @@ class TokenPriceViewModel @Inject constructor(
     }
 
     fun onSearchQueryChanged(text: String) {
-        with(_uiState.value) {
-            searchState.onSearchQueryChanged(text)
-            _uiState.value = copy(
-                tokenCurrentPriceData = searchToken(
-                    dataToSearch = tokensTokenCurrentPriceData,
-                    text = text,
-                ).map(::mapToUiModel),
-            )
-        }
+        val currentState = _uiState.value
+
+        currentState.searchState.onSearchQueryChanged(text)
+        _uiState.value = currentState.copy(
+            tokenCurrentPriceData = searchToken(tokensTokenCurrentPriceData, text)
+                .map(::mapToUiModel),
+        )
     }
 
     private fun mapToUiModel(tokenCurrentPriceData: TokenCurrentPriceData) =

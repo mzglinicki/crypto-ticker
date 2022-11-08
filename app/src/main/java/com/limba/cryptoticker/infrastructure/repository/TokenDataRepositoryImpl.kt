@@ -19,19 +19,17 @@ class TokenDataRepositoryImpl @Inject constructor(
 
     override fun getTokensCurrentPrice() = flow {
         while (true) {
-            val tokensCurrentPrice = fetchTokensCurrentPrice()
-            emit(tokensCurrentPrice)
+            emit(fetchTokensCurrentPrice())
             delay(REFRESH_INTERVAL_MS)
         }
     }
 
-    private suspend fun fetchTokensCurrentPrice() =
-        runCatching {
-            val tokensTokenCurrentPriceData = bitfinexApiClient
-                .getTickers(getSupportedTokensSymbols())
-                .mapToDomainEntity()
-            Success(tokensTokenCurrentPriceData)
-        }.getOrDefault(Error)
+    private suspend fun fetchTokensCurrentPrice() = runCatching {
+        val tokensTokenCurrentPriceData = bitfinexApiClient
+            .getTickers(getSupportedTokensSymbols())
+            .mapToDomainEntity()
+        Success(tokensTokenCurrentPriceData)
+    }.getOrDefault(Error)
 
     private fun List<TickerDto>.mapToDomainEntity() = map {
         TokenCurrentPriceData(

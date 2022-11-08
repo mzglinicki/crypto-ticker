@@ -1,15 +1,15 @@
-package com.limba.cryptoticker.domain.utils
+package com.limba.cryptoticker.utils
 
 import com.limba.cryptoticker.domain.entity.TokenCurrentPriceData
+import com.limba.cryptoticker.domain.utils.SupportedToken
 import com.limba.cryptoticker.infrastructure.api.TickerDto
 
 object TestDataFactory {
 
-    fun createTokenCurrentPriceData(token: SupportedToken) =
-        TokenCurrentPriceData(
-            token = token,
-            currentPrice = 1f,
-        )
+    fun createTokenCurrentPriceData(token: SupportedToken) = TokenCurrentPriceData(
+        token = token,
+        currentPrice = 1f,
+    )
 
     fun createTickerDto(supportedToken: SupportedToken) = TickerDto(
         symbol = supportedToken.tickerUsdSymbol,

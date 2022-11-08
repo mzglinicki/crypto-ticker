@@ -40,9 +40,10 @@ fun TickerScreen(viewModel: TokenPriceViewModel) {
             },
         ) { padding ->
             val modifier = Modifier.padding(padding)
-            when {
-                uiState.isLoading -> LoadingScreen(modifier)
-                else -> LoadedScreen(
+            if (uiState.isLoading) {
+                LoadingScreen(modifier)
+            } else {
+                LoadedScreen(
                     modifier = modifier,
                     uiState = uiState,
                 )

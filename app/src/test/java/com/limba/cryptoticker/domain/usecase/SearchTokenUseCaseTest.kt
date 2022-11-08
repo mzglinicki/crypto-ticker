@@ -1,6 +1,6 @@
 package com.limba.cryptoticker.domain.usecase
 
-import com.limba.cryptoticker.domain.utils.TestDataFactory.createTokenCurrentPriceData
+import com.limba.cryptoticker.utils.TestDataFactory.createTokenCurrentPriceData
 import com.limba.cryptoticker.domain.utils.SupportedToken.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue

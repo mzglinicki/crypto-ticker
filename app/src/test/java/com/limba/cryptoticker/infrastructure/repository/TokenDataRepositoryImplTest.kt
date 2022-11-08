@@ -2,8 +2,8 @@ package com.limba.cryptoticker.infrastructure.repository
 
 import app.cash.turbine.test
 import com.limba.cryptoticker.domain.utils.GetTokensCurrentPriceResult.*
-import com.limba.cryptoticker.domain.utils.TestDataFactory.createTickerDto
-import com.limba.cryptoticker.domain.utils.TestDataFactory.createTokenCurrentPriceData
+import com.limba.cryptoticker.utils.TestDataFactory.createTickerDto
+import com.limba.cryptoticker.utils.TestDataFactory.createTokenCurrentPriceData
 import com.limba.cryptoticker.domain.utils.SupportedToken.FILECOIN
 import com.limba.cryptoticker.infrastructure.api.BitfinexApiClient
 import com.limba.cryptoticker.infrastructure.repository.TokenDataRepositoryImpl.Companion.REFRESH_INTERVAL_MS
@@ -67,7 +67,7 @@ internal class TokenDataRepositoryImplTest {
             expectNoEvents()
 
             `when`(bitfinexApiClient.getTickers(anyString())).thenReturn(secondIntervalTickers)
-            delay(REFRESH_INTERVAL_MS + 1)
+            delay(REFRESH_INTERVAL_MS)
             assertEquals(Success(expectedSecondIntervalResult), expectMostRecentItem())
         }
     }

@@ -195,7 +195,7 @@ private fun SlideOutRight(
 fun SimpleToolbarPreview() {
     CryptoTickerTheme {
         SimpleToolbar(
-            title = "Token price"
+            title = "Token price",
         )
     }
 }

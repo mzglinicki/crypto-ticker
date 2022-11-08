@@ -7,7 +7,7 @@ import com.limba.cryptoticker.domain.utils.GetTokensCurrentPriceResult.Error
 import com.limba.cryptoticker.domain.utils.GetTokensCurrentPriceResult.Success
 import com.limba.cryptoticker.domain.utils.SupportedToken.BITCOIN
 import com.limba.cryptoticker.domain.utils.SupportedToken.SWISS_BORG
-import com.limba.cryptoticker.domain.utils.TestDataFactory.createTokenCurrentPriceData
+import com.limba.cryptoticker.utils.TestDataFactory.createTokenCurrentPriceData
 import com.limba.cryptoticker.presentation.price.TokenPriceViewModel.UiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -38,7 +38,7 @@ internal class TokenPriceViewModelTest {
     }
 
     @Test
-    fun `WHEN there is no tokens current price data THEN empty screen is displayed`() = runTest {
+    fun `WHEN there is no tokens data THEN empty screen is displayed`() = runTest {
         `when`(getTokensCurrentPrice()).thenReturn(flow { emit(Success(emptyList())) })
 
         val viewModel = createViewModel()
@@ -48,7 +48,7 @@ internal class TokenPriceViewModelTest {
     }
 
     @Test
-    fun `WHEN loading tokens current price data returns error THEN error is displayed`() = runTest {
+    fun `WHEN loading tokens data returns error THEN error is displayed`() = runTest {
         `when`(getTokensCurrentPrice()).thenReturn(flow { emit(Error) })
 
         val viewModel = createViewModel()
@@ -62,7 +62,7 @@ internal class TokenPriceViewModelTest {
     }
 
     @Test
-    fun `WHEN loading tokens current price data returns success THEN returned tokens are displayed`() =
+    fun `WHEN loading tokens data returns success THEN returned tokens are displayed`() =
         runTest {
             val tokensTokenCurrentPriceData = listOf(
                 createTokenCurrentPriceData(BITCOIN),
